@@ -1,7 +1,9 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { Avatar } from '@/components/ui/Avatar'
+import { dropdownVariants, staggerFast, staggerItem } from '@/lib/motion'
 
 const mockNotifications = [
   { id: '1', title: 'New course available', message: 'Leadership Fundamentals has been updated with new content', time: '5 min ago', read: false, avatar: 'Dr. Sarah Chen' },
@@ -80,34 +82,42 @@ export function Topbar({ onMenuClick, userName, userRole, onLogout }: TopbarProp
           </button>
 
           {/* Notification dropdown */}
-          {showNotifications && (
-            <div className="absolute right-0 top-full mt-2 w-80 rounded-2xl bg-white border border-neutral-200/80 shadow-xl shadow-neutral-900/10 z-50 animate-fade-in-up overflow-hidden">
-              <div className="flex items-center justify-between border-b border-neutral-100 px-4 py-3">
-                <h3 className="text-sm font-semibold text-neutral-900">Notifications</h3>
-                <button className="text-xs font-medium text-primary-600 hover:text-primary-700 transition-colors cursor-pointer">
-                  Mark all read
-                </button>
-              </div>
-              <div className="max-h-80 overflow-y-auto divide-y divide-neutral-50">
-                {mockNotifications.map((n) => (
-                  <div key={n.id} className={`flex gap-3 px-4 py-3 hover:bg-neutral-50 transition-colors cursor-pointer ${!n.read ? 'bg-primary-50/30' : ''}`}>
-                    <Avatar name={n.avatar} size="sm" />
-                    <div className="flex-1 min-w-0">
-                      <p className={`text-sm ${!n.read ? 'font-semibold text-neutral-900' : 'font-medium text-neutral-700'}`}>{n.title}</p>
-                      <p className="text-xs text-neutral-500 mt-0.5 line-clamp-1">{n.message}</p>
-                      <p className="text-xs text-neutral-400 mt-1">{n.time}</p>
-                    </div>
-                    {!n.read && <div className="mt-2 h-2 w-2 shrink-0 rounded-full bg-primary-500" />}
-                  </div>
-                ))}
-              </div>
-              <div className="border-t border-neutral-100 p-2">
-                <button className="w-full rounded-xl py-2 text-center text-sm font-medium text-primary-600 hover:bg-primary-50 transition-colors cursor-pointer">
-                  View all notifications
-                </button>
-              </div>
-            </div>
-          )}
+          <AnimatePresence>
+            {showNotifications && (
+              <motion.div
+                className="absolute right-0 top-full mt-2 w-80 rounded-2xl bg-white border border-neutral-200/80 shadow-xl shadow-neutral-900/10 z-50 overflow-hidden"
+                variants={dropdownVariants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+              >
+                <div className="flex items-center justify-between border-b border-neutral-100 px-4 py-3">
+                  <h3 className="text-sm font-semibold text-neutral-900">Notifications</h3>
+                  <button className="text-xs font-medium text-primary-600 hover:text-primary-700 transition-colors cursor-pointer">
+                    Mark all read
+                  </button>
+                </div>
+                <motion.div className="max-h-80 overflow-y-auto divide-y divide-neutral-50" variants={staggerFast} initial="hidden" animate="visible">
+                  {mockNotifications.map((n) => (
+                    <motion.div key={n.id} variants={staggerItem} className={`flex gap-3 px-4 py-3 hover:bg-neutral-50 transition-colors cursor-pointer ${!n.read ? 'bg-primary-50/30' : ''}`}>
+                      <Avatar name={n.avatar} size="sm" />
+                      <div className="flex-1 min-w-0">
+                        <p className={`text-sm ${!n.read ? 'font-semibold text-neutral-900' : 'font-medium text-neutral-700'}`}>{n.title}</p>
+                        <p className="text-xs text-neutral-500 mt-0.5 line-clamp-1">{n.message}</p>
+                        <p className="text-xs text-neutral-400 mt-1">{n.time}</p>
+                      </div>
+                      {!n.read && <div className="mt-2 h-2 w-2 shrink-0 rounded-full bg-primary-500" />}
+                    </motion.div>
+                  ))}
+                </motion.div>
+                <div className="border-t border-neutral-100 p-2">
+                  <button className="w-full rounded-xl py-2 text-center text-sm font-medium text-primary-600 hover:bg-primary-50 transition-colors cursor-pointer">
+                    View all notifications
+                  </button>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
 
         {/* Divider */}

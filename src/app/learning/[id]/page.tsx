@@ -2,6 +2,7 @@
 
 import { useState, useEffect, use } from 'react'
 import { useQuery, useMutation } from '@apollo/client/react'
+import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { Button } from '@/components/ui/Button'
@@ -116,8 +117,15 @@ export default function LearningPlayerPage({ params }: Props) {
           </div>
         </div>
 
+        <AnimatePresence>
         {sidebarOpen && (
-          <aside className="w-80 shrink-0 overflow-y-auto border-l border-neutral-800 bg-neutral-900">
+          <motion.aside
+            className="w-80 shrink-0 overflow-y-auto border-l border-neutral-800 bg-neutral-900"
+            initial={{ width: 0, opacity: 0 }}
+            animate={{ width: 320, opacity: 1 }}
+            exit={{ width: 0, opacity: 0 }}
+            transition={{ duration: 0.25, ease: 'easeInOut' }}
+          >
             <div className="p-4"><h2 className="text-sm font-semibold uppercase tracking-wider text-neutral-400">Course Content</h2></div>
             {course.modules.map((mod: { id: string; title: string; duration: string; lessons: { id: string; title: string; type: string; duration: string; completed: boolean }[] }, modIndex: number) => {
               const modLessonsStart = course.modules.slice(0, modIndex).reduce((acc: number, m: { lessons: unknown[] }) => acc + m.lessons.length, 0)
@@ -151,8 +159,9 @@ export default function LearningPlayerPage({ params }: Props) {
                 </div>
               )
             })}
-          </aside>
+          </motion.aside>
         )}
+        </AnimatePresence>
       </div>
     </div>
   )

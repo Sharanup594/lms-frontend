@@ -2,6 +2,7 @@
 
 import { use } from 'react'
 import { useQuery } from '@apollo/client/react'
+import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { Card } from '@/components/ui/Card'
@@ -46,7 +47,7 @@ export default function CourseDetailPage({ params }: Props) {
   const levelDisplay: Record<string, string> = { BEGINNER: 'Beginner', INTERMEDIATE: 'Intermediate', ADVANCED: 'Advanced' }
 
   return (
-    <div className="space-y-6">
+    <motion.div className="space-y-6" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35, ease: 'easeOut' }}>
       <nav className="flex items-center gap-2 text-sm text-neutral-500">
         <Link href="/courses" className="hover:text-primary-600 transition-colors">Courses</Link>
         <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
@@ -161,6 +162,6 @@ export default function CourseDetailPage({ params }: Props) {
           </Card>
         </div>
       </div>
-    </div>
+    </motion.div>
   )
 }

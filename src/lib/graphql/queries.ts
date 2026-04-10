@@ -264,3 +264,38 @@ export const MY_ASSESSMENT_ATTEMPTS_QUERY = gql`
     }
   }
 `
+
+// ── Admin Analytics ──────────────────────────────────
+
+export const ANALYTICS_QUERY = gql`
+  query Analytics {
+    analytics {
+      enrollmentsByCategory {
+        category
+        count
+      }
+      completionByCategory {
+        category
+        count
+      }
+      assessmentScoreDistribution {
+        range
+        count
+      }
+      eiScoreDistribution {
+        range
+        count
+      }
+      enrollmentTrend {
+        month
+        count
+      }
+      topCourses {
+        id
+        title
+        enrolled
+        avgProgress
+      }
+    }
+  }
+`

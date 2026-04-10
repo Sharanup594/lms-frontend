@@ -8,6 +8,7 @@ import { ProgressBar } from '@/components/ui/ProgressBar'
 import { PageHeader } from '@/components/layout/PageHeader'
 import { Skeleton } from '@/components/ui/Skeleton'
 import { useAuth } from '@/hooks/useAuth'
+import { generateCertificate } from '@/lib/certificate'
 import { MY_COURSES_QUERY, ACHIEVEMENTS_QUERY, DASHBOARD_STATS_QUERY } from '@/lib/graphql/queries'
 import Link from 'next/link'
 
@@ -108,6 +109,45 @@ export default function ProfilePage() {
               </div>
             )}
           </Card>
+
+          {/* Certificates */}
+          {courses.filter((c: { progress: number }) => c.progress === 100).length > 0 && (
+            <Card>
+              <h3 className="mb-4 text-lg font-semibold text-neutral-900">My Certificates</h3>
+              <div className="space-y-3">
+                {courses.filter((c: { progress: number }) => c.progress === 100).map((course: { id: string; title: string; instructor: { name: string } }) => (
+                  <div key={course.id} className="flex items-center justify-between rounded-xl border border-neutral-100 p-3">
+                    <div className="flex items-center gap-3">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-success-50 text-success-600">
+                        <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 01-.982-3.172M9.497 14.25a7.454 7.454 0 00.981-3.172M5.25 4.236c-.982.143-1.954.317-2.916.52A6.003 6.003 0 007.73 9.728M5.25 4.236V4.5c0 2.108.966 3.99 2.48 5.228M5.25 4.236V2.721C7.456 2.41 9.71 2.25 12 2.25c2.291 0 4.545.16 6.75.47v1.516M18.75 4.236c.982.143 1.954.317 2.916.52A6.003 6.003 0 0016.27 9.728M18.75 4.236V4.5c0 2.108-.966 3.99-2.48 5.228m0 0a6.003 6.003 0 01-5.54 0" />
+                        </svg>
+                      </div>
+                      <div>
+                        <p className="font-medium text-neutral-900">{course.title}</p>
+                        <p className="text-xs text-neutral-500">Completed • Certificate available</p>
+                      </div>
+                    </div>
+                    <button
+                      onClick={() => generateCertificate({
+                        studentName: user?.name ?? 'Student',
+                        courseName: course.title,
+                        instructorName: course.instructor?.name ?? 'Instructor',
+                        completionDate: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }),
+                        certificateId: `LH-${course.id.toUpperCase()}-${user?.id?.slice(-6)?.toUpperCase() ?? '000000'}`,
+                      })}
+                      className="flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm font-medium text-primary-600 hover:bg-primary-50 transition-colors cursor-pointer"
+                    >
+                      <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                      </svg>
+                      Download
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </Card>
+          )}
 
           <Card>
             <div className="mb-4 flex items-center justify-between">

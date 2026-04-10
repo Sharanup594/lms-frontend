@@ -10,6 +10,8 @@ import { Button } from '@/components/ui/Button'
 import { ProgressBar } from '@/components/ui/ProgressBar'
 import { Avatar } from '@/components/ui/Avatar'
 import { Skeleton } from '@/components/ui/Skeleton'
+import { useAuth } from '@/hooks/useAuth'
+import { generateCertificate } from '@/lib/certificate'
 import { COURSE_QUERY } from '@/lib/graphql/queries'
 
 interface Props {
@@ -18,6 +20,7 @@ interface Props {
 
 export default function CourseDetailPage({ params }: Props) {
   const { id } = use(params)
+  const { user } = useAuth()
   const { data, loading } = useQuery<any>(COURSE_QUERY, { variables: { id } })
   const course = data?.course
 
@@ -129,6 +132,24 @@ export default function CourseDetailPage({ params }: Props) {
                 {progress === 100 && 'Review Course'}
               </Button>
             </Link>
+
+            {progress === 100 && (
+              <button
+                onClick={() => generateCertificate({
+                  studentName: user?.name ?? 'Student',
+                  courseName: course.title,
+                  instructorName: course.instructor?.name ?? 'Instructor',
+                  completionDate: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }),
+                  certificateId: `LH-${course.id.toUpperCase()}-${user?.id?.slice(-6)?.toUpperCase() ?? '000000'}`,
+                })}
+                className="mt-3 flex w-full items-center justify-center gap-2 rounded-xl bg-success-50 px-4 py-3 text-sm font-semibold text-success-700 hover:bg-success-100 transition-colors cursor-pointer border border-success-200"
+              >
+                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                </svg>
+                Download Certificate
+              </button>
+            )}
           </Card>
 
           <Card>

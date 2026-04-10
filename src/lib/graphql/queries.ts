@@ -181,3 +181,86 @@ export const USERS_QUERY = gql`
     }
   }
 `
+
+// ── Pre-Enrolment Queries ────────────────────────────
+
+export const MY_SKILL_ASSESSMENT_QUERY = gql`
+  query MySkillAssessment {
+    mySkillAssessment {
+      id
+      userId
+      score
+      interests
+      recommendedCourseIds
+      completedAt
+    }
+  }
+`
+
+// ── Assessment Queries ───────────────────────────────
+
+export const ASSESSMENT_QUERY = gql`
+  query Assessment($id: ID!) {
+    assessment(id: $id) {
+      id
+      title
+      description
+      type
+      courseId
+      moduleId
+      passingScore
+      timeLimit
+      totalPoints
+      questions {
+        id
+        question
+        type
+        options
+        points
+        orderIndex
+      }
+      myAttempt {
+        id
+        score
+        totalPoints
+        passed
+        completedAt
+      }
+    }
+  }
+`
+
+export const COURSE_ASSESSMENTS_QUERY = gql`
+  query CourseAssessments($courseId: ID!) {
+    courseAssessments(courseId: $courseId) {
+      id
+      title
+      description
+      type
+      passingScore
+      timeLimit
+      totalPoints
+      myAttempt {
+        id
+        score
+        totalPoints
+        passed
+        completedAt
+      }
+    }
+  }
+`
+
+export const MY_ASSESSMENT_ATTEMPTS_QUERY = gql`
+  query MyAssessmentAttempts {
+    myAssessmentAttempts {
+      id
+      assessmentId
+      score
+      totalPoints
+      passed
+      startedAt
+      completedAt
+    }
+  }
+`

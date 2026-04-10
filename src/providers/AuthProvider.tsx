@@ -126,7 +126,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         setToken(result.token)
         setUser(result.user)
       }
-      router.push('/dashboard')
+      // New signups go to welcome page for skill assessment
+      router.push('/welcome')
       return null
     } catch (err: unknown) {
       if (isAbortError(err)) return null

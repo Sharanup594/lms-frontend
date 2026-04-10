@@ -73,3 +73,46 @@ export const UPDATE_USER_MUTATION = gql`
     }
   }
 `
+
+// ── Pre-Enrolment Mutations ─────────────────────────
+
+export const SUBMIT_SKILL_ASSESSMENT_MUTATION = gql`
+  mutation SubmitSkillAssessment($answers: [SkillAnswerInput!]!, $interests: [String!]!) {
+    submitSkillAssessment(answers: $answers, interests: $interests) {
+      id
+      score
+      interests
+      recommendedCourseIds
+      completedAt
+    }
+  }
+`
+
+// ── Assessment Mutations ────────────────────────────
+
+export const SUBMIT_ASSESSMENT_MUTATION = gql`
+  mutation SubmitAssessment($assessmentId: ID!, $answers: [Int!]!) {
+    submitAssessment(assessmentId: $assessmentId, answers: $answers) {
+      id
+      score
+      totalPoints
+      passed
+      completedAt
+    }
+  }
+`
+
+export const CREATE_ASSESSMENT_MUTATION = gql`
+  mutation CreateAssessment($input: CreateAssessmentInput!) {
+    createAssessment(input: $input) {
+      id
+      title
+    }
+  }
+`
+
+export const DELETE_ASSESSMENT_MUTATION = gql`
+  mutation DeleteAssessment($id: ID!) {
+    deleteAssessment(id: $id)
+  }
+`

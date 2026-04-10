@@ -63,3 +63,51 @@ export interface Achievement {
   icon: string
   earnedDate: string
 }
+
+// ── Pre-Enrolment ───────────────────────────────────
+
+export interface SkillAssessment {
+  id: string
+  userId: string
+  score: number
+  interests: string[]
+  recommendedCourseIds: string[]
+  completedAt: string
+}
+
+// ── Course Assessments ──────────────────────────────
+
+export interface Assessment {
+  id: string
+  title: string
+  description: string
+  type: 'PRE_COURSE' | 'IN_COURSE' | 'POST_COURSE'
+  courseId: string
+  moduleId?: string
+  passingScore: number
+  timeLimit?: number
+  totalPoints: number
+  published: boolean
+  questions: AssessmentQuestion[]
+  myAttempt?: AssessmentAttempt
+}
+
+export interface AssessmentQuestion {
+  id: string
+  question: string
+  type: string
+  options: string[]
+  points: number
+  orderIndex: number
+}
+
+export interface AssessmentAttempt {
+  id: string
+  userId: string
+  assessmentId: string
+  score: number
+  totalPoints: number
+  passed: boolean
+  startedAt: string
+  completedAt?: string
+}

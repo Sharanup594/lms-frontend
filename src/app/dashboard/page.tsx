@@ -1,7 +1,6 @@
 'use client'
 
 import { useQuery } from '@apollo/client/react'
-import { motion } from 'framer-motion'
 import { StatsCard } from '@/components/dashboard/StatsCard'
 import { CourseCard } from '@/components/course/CourseCard'
 import { Card } from '@/components/ui/Card'
@@ -9,8 +8,8 @@ import { ProgressBar } from '@/components/ui/ProgressBar'
 import { Skeleton } from '@/components/ui/Skeleton'
 import { useAuth } from '@/hooks/useAuth'
 import { DASHBOARD_STATS_QUERY, MY_COURSES_QUERY } from '@/lib/graphql/queries'
-import { fadeInUp, staggerContainer, staggerItem } from '@/lib/motion'
 import Link from 'next/link'
+
 
 export default function DashboardPage() {
   const { user } = useAuth()
@@ -24,9 +23,9 @@ export default function DashboardPage() {
   const loading = statsLoading || coursesLoading
 
   return (
-    <motion.div className="space-y-6" initial="hidden" animate="visible" variants={staggerContainer}>
+    <div className="space-y-6">
       {/* Welcome */}
-      <motion.div variants={fadeInUp} className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-primary-600 via-primary-700 to-primary-800 p-6 text-white lg:p-8">
+      <div className="animate-fade-in-up relative overflow-hidden rounded-2xl bg-gradient-to-r from-primary-600 via-primary-700 to-primary-800 p-6 text-white lg:p-8">
         <div className="absolute -right-8 -top-8 h-40 w-40 rounded-full bg-white/10" />
         <div className="absolute right-16 top-20 h-24 w-24 rounded-full bg-white/5" />
         <div className="absolute -right-4 bottom-0 h-32 w-32 rounded-full bg-white/5" />
@@ -47,7 +46,7 @@ export default function DashboardPage() {
             </svg>
           </Link>
         </div>
-      </motion.div>
+      </div>
 
       {/* Stats row */}
       {loading ? (
@@ -55,12 +54,12 @@ export default function DashboardPage() {
           {Array.from({ length: 4 }).map((_, i) => <Skeleton key={i} className="h-32 w-full rounded-2xl" />)}
         </div>
       ) : (
-        <motion.div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4" variants={staggerContainer} initial="hidden" animate="visible">
-          <motion.div variants={staggerItem}><StatsCard title="Courses Enrolled" value={stats?.coursesEnrolled ?? 0} change={{ value: 12, direction: 'up' }} color="bg-primary-50 text-primary-600" icon={<svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" /></svg>} /></motion.div>
-          <motion.div variants={staggerItem}><StatsCard title="Completed" value={stats?.coursesCompleted ?? 0} change={{ value: 8, direction: 'up' }} color="bg-success-50 text-success-600" icon={<svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>} /></motion.div>
-          <motion.div variants={staggerItem}><StatsCard title="Hours Learned" value={stats?.hoursLearned ?? 0} change={{ value: 15, direction: 'up' }} color="bg-warning-50 text-warning-600" icon={<svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>} /></motion.div>
-          <motion.div variants={staggerItem}><StatsCard title="Certificates" value={stats?.certificates ?? 0} color="bg-purple-50 text-purple-600" icon={<svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 01-.982-3.172M9.497 14.25a7.454 7.454 0 00.981-3.172M5.25 4.236c-.982.143-1.954.317-2.916.52A6.003 6.003 0 007.73 9.728M5.25 4.236V4.5c0 2.108.966 3.99 2.48 5.228M5.25 4.236V2.721C7.456 2.41 9.71 2.25 12 2.25c2.291 0 4.545.16 6.75.47v1.516M18.75 4.236c.982.143 1.954.317 2.916.52A6.003 6.003 0 0016.27 9.728M18.75 4.236V4.5c0 2.108-.966 3.99-2.48 5.228m0 0a6.003 6.003 0 01-5.54 0" /></svg>} /></motion.div>
-        </motion.div>
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+          <div className="animate-fade-in-up"><StatsCard title="Courses Enrolled" value={stats?.coursesEnrolled ?? 0} change={{ value: 12, direction: 'up' }} color="bg-primary-50 text-primary-600" icon={<svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" /></svg>} /></div>
+          <div className="animate-fade-in-up"><StatsCard title="Completed" value={stats?.coursesCompleted ?? 0} change={{ value: 8, direction: 'up' }} color="bg-success-50 text-success-600" icon={<svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>} /></div>
+          <div className="animate-fade-in-up"><StatsCard title="Hours Learned" value={stats?.hoursLearned ?? 0} change={{ value: 15, direction: 'up' }} color="bg-warning-50 text-warning-600" icon={<svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>} /></div>
+          <div className="animate-fade-in-up"><StatsCard title="Certificates" value={stats?.certificates ?? 0} color="bg-purple-50 text-purple-600" icon={<svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 01-.982-3.172M9.497 14.25a7.454 7.454 0 00.981-3.172M5.25 4.236c-.982.143-1.954.317-2.916.52A6.003 6.003 0 007.73 9.728M5.25 4.236V4.5c0 2.108.966 3.99 2.48 5.228M5.25 4.236V2.721C7.456 2.41 9.71 2.25 12 2.25c2.291 0 4.545.16 6.75.47v1.516M18.75 4.236c.982.143 1.954.317 2.916.52A6.003 6.003 0 0016.27 9.728M18.75 4.236V4.5c0 2.108-.966 3.99-2.48 5.228m0 0a6.003 6.003 0 01-5.54 0" /></svg>} /></div>
+        </div>
       )}
 
       {/* Continue Learning */}
@@ -106,6 +105,6 @@ export default function DashboardPage() {
           </div>
         </div>
       )}
-    </motion.div>
+    </div>
   )
 }

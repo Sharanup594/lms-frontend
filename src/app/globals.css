@@ -90,6 +90,8 @@ html {
   background: linear-gradient(90deg, var(--color-neutral-200) 25%, var(--color-neutral-100) 50%, var(--color-neutral-200) 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s ease-in-out infinite;
+  will-change: background-position;
+  contain: layout paint;
 }
 
 /* Progress bar animated stripes */
@@ -119,6 +121,7 @@ html {
 }
 .badge-pulse {
   animation: badge-pulse 2s ease-in-out infinite;
+  will-change: transform;
 }
 
 /* Fade in animation */
@@ -137,6 +140,7 @@ html {
 }
 .animate-glow {
   animation: glow-pulse 2s ease-in-out infinite;
+  will-change: box-shadow;
 }
 
 /* Dot pattern background for video player */

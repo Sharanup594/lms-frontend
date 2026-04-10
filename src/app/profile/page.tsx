@@ -1,7 +1,6 @@
 'use client'
 
 import { useQuery } from '@apollo/client/react'
-import { motion } from 'framer-motion'
 import { Card } from '@/components/ui/Card'
 import { Avatar } from '@/components/ui/Avatar'
 import { Badge } from '@/components/ui/Badge'
@@ -33,7 +32,7 @@ export default function ProfilePage() {
   const loading = coursesLoading || achievementsLoading
 
   return (
-    <motion.div className="space-y-6" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35, ease: 'easeOut' }}>
+    <div className="space-y-6 animate-fade-in-up">
       <PageHeader title="My Profile" />
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
@@ -136,6 +135,6 @@ export default function ProfilePage() {
           </Card>
         </div>
       </div>
-    </motion.div>
+    </div>
   )
 }

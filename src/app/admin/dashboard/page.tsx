@@ -1,7 +1,6 @@
 'use client'
 
 import { useQuery } from '@apollo/client/react'
-import { motion } from 'framer-motion'
 import { Card } from '@/components/ui/Card'
 import { StatsCard } from '@/components/dashboard/StatsCard'
 import { Avatar } from '@/components/ui/Avatar'
@@ -21,7 +20,7 @@ export default function AdminDashboardPage() {
   const roleVariant = { LEARNER: 'primary' as const, INSTRUCTOR: 'success' as const, ADMIN: 'warning' as const }
 
   return (
-    <motion.div className="space-y-6" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35, ease: 'easeOut' }}>
+    <div className="space-y-6 animate-fade-in-up">
       <div>
         <h1 className="text-2xl font-bold text-neutral-900">Admin Dashboard</h1>
         <p className="mt-1 text-sm text-neutral-500">Overview of platform activity and management</p>
@@ -86,6 +85,6 @@ export default function AdminDashboardPage() {
           </div>
         </Card>
       </div>
-    </motion.div>
+    </div>
   )
 }

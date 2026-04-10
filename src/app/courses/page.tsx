@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react'
 import { useQuery } from '@apollo/client/react'
-import { motion } from 'framer-motion'
 import { CourseCard } from '@/components/course/CourseCard'
 import { PageHeader } from '@/components/layout/PageHeader'
 import { Skeleton } from '@/components/ui/Skeleton'
@@ -81,19 +80,14 @@ export default function CoursesPage() {
           {Array.from({ length: 8 }).map((_, i) => <Skeleton key={i} className="h-72 w-full rounded-2xl" />)}
         </div>
       ) : filtered.length > 0 ? (
-        <motion.div
-          className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-          initial="hidden"
-          animate="visible"
-          variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.06 } } }}
-        >
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
           {filtered.map((course: any) => (
-            <motion.div key={course.id} variants={{ hidden: { opacity: 0, y: 16 }, visible: { opacity: 1, y: 0, transition: { duration: 0.3 } } }}>
+            <div key={course.id} className="animate-fade-in-up">
               <CourseCard course={course} />
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       ) : (
         <div className="flex flex-col items-center justify-center py-16 text-center">
           <svg className="mb-4 h-16 w-16 text-neutral-300" fill="none" viewBox="0 0 24 24" strokeWidth="1" stroke="currentColor">

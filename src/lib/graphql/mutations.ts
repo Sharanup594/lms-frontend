@@ -116,3 +116,39 @@ export const DELETE_ASSESSMENT_MUTATION = gql`
     deleteAssessment(id: $id)
   }
 `
+
+// ── Stage 4: Projects ────────────────────────────────
+
+export const SUBMIT_PROJECT_MUTATION = gql`
+  mutation SubmitProject($projectId: ID!, $submissionUrl: String!) {
+    submitProject(projectId: $projectId, submissionUrl: $submissionUrl) {
+      id
+      status
+    }
+  }
+`
+
+// ── Stage 6: Feedback ────────────────────────────────
+
+export const SUBMIT_FEEDBACK_MUTATION = gql`
+  mutation SubmitFeedback($courseId: String, $rating: Int!, $comment: String!, $category: String) {
+    submitFeedback(courseId: $courseId, rating: $rating, comment: $comment, category: $category) {
+      id
+      rating
+      comment
+    }
+  }
+`
+
+// ── Stage 7: Placement ──────────────────────────────
+
+export const UPDATE_PLACEMENT_MUTATION = gql`
+  mutation UpdateMyPlacement($status: String!, $company: String, $role: String, $salary: String, $notes: String) {
+    updateMyPlacement(status: $status, company: $company, role: $role, salary: $salary, notes: $notes) {
+      id
+      status
+      company
+      role
+    }
+  }
+`

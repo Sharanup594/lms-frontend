@@ -299,3 +299,99 @@ export const ANALYTICS_QUERY = gql`
     }
   }
 `
+
+// ── Stage 4: Projects ────────────────────────────────
+
+export const PROJECTS_QUERY = gql`
+  query Projects($complexity: String) {
+    projects(complexity: $complexity) {
+      id
+      title
+      description
+      complexity
+      month
+    }
+  }
+`
+
+export const MY_PROJECTS_QUERY = gql`
+  query MyProjects {
+    myProjects {
+      id
+      project {
+        id
+        title
+        description
+        complexity
+        month
+      }
+      status
+      submissionUrl
+      feedback
+      score
+      assignedAt
+      submittedAt
+      reviewedAt
+    }
+  }
+`
+
+// ── Stage 6: Feedback ────────────────────────────────
+
+export const MY_FEEDBACKS_QUERY = gql`
+  query MyFeedbacks {
+    myFeedbacks {
+      id
+      rating
+      comment
+      category
+      createdAt
+    }
+  }
+`
+
+export const ALL_FEEDBACKS_QUERY = gql`
+  query AllFeedbacks {
+    allFeedbacks {
+      id
+      userId
+      userName
+      rating
+      comment
+      category
+      createdAt
+    }
+  }
+`
+
+// ── Stage 7: Placement ──────────────────────────────
+
+export const MY_PLACEMENT_QUERY = gql`
+  query MyPlacement {
+    myPlacement {
+      id
+      status
+      company
+      role
+      salary
+      appliedAt
+      placedAt
+      notes
+    }
+  }
+`
+
+export const ALL_PLACEMENTS_QUERY = gql`
+  query AllPlacements {
+    allPlacements {
+      id
+      userId
+      userName
+      status
+      company
+      role
+      salary
+      placedAt
+    }
+  }
+`

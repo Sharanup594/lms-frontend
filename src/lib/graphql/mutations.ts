@@ -152,3 +152,20 @@ export const UPDATE_PLACEMENT_MUTATION = gql`
     }
   }
 `
+
+// ── Notifications ────────────────────────────────────
+
+export const MARK_NOTIFICATION_READ_MUTATION = gql`
+  mutation MarkNotificationRead($id: ID!) {
+    markNotificationRead(id: $id) {
+      id
+      read
+    }
+  }
+`
+
+export const MARK_ALL_NOTIFICATIONS_READ_MUTATION = gql`
+  mutation MarkAllNotificationsRead {
+    markAllNotificationsRead
+  }
+`

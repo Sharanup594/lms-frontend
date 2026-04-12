@@ -395,3 +395,25 @@ export const ALL_PLACEMENTS_QUERY = gql`
     }
   }
 `
+
+// ── Notifications ────────────────────────────────────
+
+export const MY_NOTIFICATIONS_QUERY = gql`
+  query MyNotifications {
+    myNotifications {
+      id
+      title
+      message
+      type
+      read
+      link
+      createdAt
+    }
+  }
+`
+
+export const UNREAD_COUNT_QUERY = gql`
+  query UnreadNotificationCount {
+    unreadNotificationCount
+  }
+`

@@ -52,11 +52,49 @@
   --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
 }
 
+/* === Dark mode overrides === */
+.dark {
+  --color-surface-primary: #0F172A;
+  --color-surface-secondary: #0B1120;
+  --color-surface-tertiary: #1E293B;
+  color-scheme: dark;
+}
+
 body {
   font-family: var(--font-sans);
   background-color: var(--color-surface-secondary);
   color: var(--color-neutral-900);
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
+
+/* Dark mode body */
+.dark body,
+html.dark body {
+  background-color: #0B1120;
+  color: #E2E8F0;
+}
+
+/* Dark mode: cards, inputs, and surfaces */
+.dark .bg-white { background-color: #1E293B !important; }
+.dark .bg-surface-secondary { background-color: #0B1120 !important; }
+.dark .bg-neutral-50 { background-color: #1E293B !important; }
+.dark .bg-neutral-100 { background-color: #334155 !important; }
+
+/* Dark mode: text colors */
+.dark .text-neutral-900 { color: #F1F5F9 !important; }
+.dark .text-neutral-800 { color: #E2E8F0 !important; }
+.dark .text-neutral-700 { color: #CBD5E1 !important; }
+.dark .text-neutral-600 { color: #94A3B8 !important; }
+.dark .text-neutral-500 { color: #64748B !important; }
+
+/* Dark mode: borders */
+.dark .border-neutral-200 { border-color: #334155 !important; }
+.dark .border-neutral-200\/80 { border-color: rgba(51,65,85,0.8) !important; }
+.dark .border-neutral-100 { border-color: #1E293B !important; }
+
+/* Dark mode: hover states */
+.dark .hover\:bg-neutral-50:hover { background-color: #334155 !important; }
+.dark .hover\:bg-neutral-100:hover { background-color: #475569 !important; }
 
 /* Focus ring utility */
 *:focus-visible {

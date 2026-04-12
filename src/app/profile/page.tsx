@@ -1,5 +1,6 @@
 'use client'
 
+import { useState, useRef } from 'react'
 import { useQuery } from '@apollo/client/react'
 import { Card } from '@/components/ui/Card'
 import { Avatar } from '@/components/ui/Avatar'
@@ -26,6 +27,28 @@ export default function ProfilePage() {
   const { data: achievementsData, loading: achievementsLoading } = useQuery<any>(ACHIEVEMENTS_QUERY)
   const { data: statsData } = useQuery<any>(DASHBOARD_STATS_QUERY)
 
+  const [avatarUrl, setAvatarUrl] = useState<string | null>(null)
+  const fileInputRef = useRef<HTMLInputElement>(null)
+
+  async function handleAvatarUpload(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0]
+    if (!file) return
+    const formData = new FormData()
+    formData.append('file', file)
+    const token = localStorage.getItem('token')
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_GRAPHQL_URL?.replace('/graphql', '')}/upload/avatar`, {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${token}` },
+        body: formData,
+      })
+      const data = await res.json()
+      if (data.url) setAvatarUrl(`${process.env.NEXT_PUBLIC_GRAPHQL_URL?.replace('/graphql', '')}${data.url}`)
+    } catch (err) {
+      console.error('Upload failed:', err)
+    }
+  }
+
   const courses = coursesData?.myCourses ?? []
   const achievements = achievementsData?.achievements ?? []
   const stats = statsData?.myDashboardStats
@@ -45,8 +68,25 @@ export default function ProfilePage() {
             </div>
             <div className="relative px-6 pb-6">
               <div className="-mt-10 mb-3">
-                <div className="inline-block rounded-full ring-4 ring-white">
-                  <Avatar name={user?.name ?? ''} size="xl" />
+                <div className="relative inline-block">
+                  <div className="rounded-full ring-4 ring-white overflow-hidden">
+                    {avatarUrl ? (
+                      <img src={avatarUrl} alt={user?.name ?? ''} className="h-16 w-16 rounded-full object-cover" />
+                    ) : (
+                      <Avatar name={user?.name ?? ''} size="xl" />
+                    )}
+                  </div>
+                  <button
+                    onClick={() => fileInputRef.current?.click()}
+                    className="absolute -bottom-1 -right-1 flex h-7 w-7 items-center justify-center rounded-full bg-primary-600 text-white shadow-lg hover:bg-primary-700 transition-colors cursor-pointer"
+                    aria-label="Upload avatar"
+                  >
+                    <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0z" />
+                    </svg>
+                  </button>
+                  <input ref={fileInputRef} type="file" accept="image/*" onChange={handleAvatarUpload} className="hidden" />
                 </div>
               </div>
               <h2 className="text-xl font-bold text-neutral-900">{user?.name}</h2>

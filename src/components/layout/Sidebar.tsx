@@ -328,11 +328,9 @@ export function Sidebar({ open, onClose, items, onLogout }: SidebarProps) {
       >
         {/* Logo */}
         <div className="flex h-16 items-center gap-3 border-b border-neutral-100 px-6">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-primary-600 to-primary-800 text-white font-bold text-sm shadow-md shadow-primary-600/25">
-            VA
-          </div>
+          <img height="36" width="36" className="rounded-full" src="/VA.png" alt="V-Align" />
           <span className="text-lg font-bold text-neutral-900 tracking-tight">
-            V-Align LMS
+            VA LMS
           </span>
         </div>
 

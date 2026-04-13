@@ -76,12 +76,10 @@ export default function LoginPage() {
       <div className="w-full max-w-md">
         {/* Logo */}
         <div className="mb-8 text-center">
-          <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-primary-600 to-primary-800 text-white font-bold text-xl shadow-lg shadow-primary-600/30">
-            VA
-          </div>
+          <img height="56" width="56" className="mx-auto mb-0 rounded-full shadow-lg" src="/VA.png" alt="V-Align" />
           <h1 className="text-2xl font-bold text-neutral-900">Welcome back</h1>
           <p className="mt-1 text-sm text-neutral-500">
-            Sign in to your V-Align LMS account
+            Sign in to your VA LMS account
           </p>
         </div>
 

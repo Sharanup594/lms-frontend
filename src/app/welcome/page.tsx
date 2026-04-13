@@ -17,14 +17,12 @@ export default function WelcomePage() {
           <div className="relative mx-auto mb-8">
             <div className="absolute -inset-12 rounded-full bg-primary-100/40 blur-3xl" />
             <div className="relative">
-              <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-primary-600 to-primary-800 text-white text-4xl shadow-xl shadow-primary-600/30">
-                🎉
-              </div>
+              <img height="80" width="80" className="mx-auto rounded-full shadow-xl" src="/VA.png" alt="V-Align" />
             </div>
           </div>
 
           <h1 className="text-3xl font-extrabold text-neutral-900 sm:text-4xl">
-            Welcome to V-Align LMS, {user?.name?.split(" ")[0] ?? "there"}!
+            Welcome to VA LMS, {user?.name?.split(" ")[0] ?? "there"}!
           </h1>
           <p className="mt-4 text-lg text-neutral-600 max-w-lg mx-auto">
             Your account is ready. Before you start learning, let&apos;s find

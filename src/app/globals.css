@@ -2,20 +2,20 @@
 
 @theme inline {
   /* === V-Align Brand Color Palette === */
-  /* Primary: Castleton Green scale */
-  --color-primary-50: #E8F5F0;
-  --color-primary-100: #C5E8DC;
-  --color-primary-200: #9DD9C5;
-  --color-primary-300: #6DC4A8;
-  --color-primary-400: #3DAF8B;
-  --color-primary-500: #158D6E;
-  --color-primary-600: #10664F;
-  --color-primary-700: #0D5542;
-  --color-primary-800: #094435;
-  --color-primary-900: #053328;
+  /* Primary: Pear (#B6ED3E) scale */
+  --color-primary-50: #F5FDE8;
+  --color-primary-100: #E8F9C5;
+  --color-primary-200: #D4F48E;
+  --color-primary-300: #C5F062;
+  --color-primary-400: #B6ED3E;
+  --color-primary-500: #9DD425;
+  --color-primary-600: #B6ED3E;
+  --color-primary-700: #7AB520;
+  --color-primary-800: #5E8C18;
+  --color-primary-900: #436410;
 
-  /* Accent: Pear (V-Align highlight) */
-  --color-accent: #B6ED3E;
+  /* Accent: Castleton Green (secondary) */
+  --color-accent: #10664F;
 
   --color-success-50: #F0FDF4;
   --color-success-500: #22C55E;

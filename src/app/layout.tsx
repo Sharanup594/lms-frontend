@@ -12,7 +12,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "V-Align LMS",
+  title: "VA LMS",
   description: "V-Align Technologies — Enterprise Learning Management System",
 };
 

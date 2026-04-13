@@ -1,21 +1,21 @@
-'use client'
+"use client";
 
-import { useEffect } from 'react'
-import { useRouter } from 'next/navigation'
-import Link from 'next/link'
-import { useAuth } from '@/hooks/useAuth'
-import { Button } from '@/components/ui/Button'
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { useAuth } from "@/hooks/useAuth";
+import { Button } from "@/components/ui/Button";
 
 export default function Home() {
-  const router = useRouter()
-  const { role, isLoading } = useAuth()
+  const router = useRouter();
+  const { role, isLoading } = useAuth();
 
   // If already logged in, redirect to dashboard
   useEffect(() => {
-    if (isLoading) return
-    if (role === 'admin') router.replace('/admin/dashboard')
-    else if (role === 'student') router.replace('/dashboard')
-  }, [role, isLoading, router])
+    if (isLoading) return;
+    if (role === "admin") router.replace("/admin/dashboard");
+    else if (role === "student") router.replace("/dashboard");
+  }, [role, isLoading, router]);
 
   // Show landing page for unauthenticated visitors
   if (!isLoading && !role) {
@@ -24,14 +24,18 @@ export default function Home() {
         {/* Nav */}
         <header className="flex items-center justify-between px-6 py-4 lg:px-12">
           <div className="flex items-center gap-3">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-primary-500 to-primary-700 text-white font-bold text-sm shadow-md shadow-primary-500/25">
-              LH
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-primary-600 to-primary-800 text-white font-bold text-sm shadow-md shadow-primary-600/25">
+              VA
             </div>
-            <span className="text-lg font-bold text-neutral-900 tracking-tight">LearnHub</span>
+            <span className="text-lg font-bold text-neutral-900 tracking-tight">
+              V-Align LMS
+            </span>
           </div>
           <div className="flex items-center gap-3">
             <Link href="/login">
-              <Button variant="ghost" size="sm">Sign in</Button>
+              <Button variant="ghost" size="sm">
+                Sign in
+              </Button>
             </Link>
             <Link href="/signup">
               <Button size="sm">Get Started</Button>
@@ -48,23 +52,34 @@ export default function Home() {
             </div>
 
             <h1 className="text-4xl font-extrabold text-neutral-900 tracking-tight sm:text-5xl lg:text-6xl">
-              Welcome to{' '}
-              <span className="bg-gradient-to-r from-primary-600 to-indigo-600 bg-clip-text text-transparent">
-                LearnHub
+              Welcome to{" "}
+              <span className="bg-gradient-to-r from-primary-600 to-primary-400 bg-clip-text text-transparent">
+                V-Align LMS
               </span>
             </h1>
 
             <p className="mt-6 text-lg text-neutral-600 max-w-2xl mx-auto leading-relaxed">
-              Upskill your career with industry-leading courses in Leadership, Technology, Management, and more.
-              Track your progress, earn certificates, and land your dream job.
+              Upskill your career with industry-leading courses in Leadership,
+              Technology, Management, and more. Track your progress, earn
+              certificates, and land your dream job.
             </p>
 
             <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link href="/signup">
                 <Button size="lg" className="px-8">
                   Get Started Free
-                  <svg className="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                  <svg
+                    className="h-4 w-4 ml-2"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="2"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+                    />
                   </svg>
                 </Button>
               </Link>
@@ -79,12 +94,31 @@ export default function Home() {
           {/* Feature cards */}
           <div className="mt-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl w-full">
             {[
-              { icon: '📊', title: 'Skill Assessment', desc: 'Discover your Employability Index with our skill benchmarking quiz' },
-              { icon: '📚', title: 'Expert Courses', desc: 'Learn from industry professionals with structured curriculum' },
-              { icon: '📝', title: 'Assessments', desc: 'Pre-course, in-course, and post-course evaluations to track growth' },
-              { icon: '🎯', title: 'Certifications', desc: 'Earn recognized certificates upon course completion' },
+              {
+                icon: "📊",
+                title: "Skill Assessment",
+                desc: "Discover your Employability Index with our skill benchmarking quiz",
+              },
+              {
+                icon: "📚",
+                title: "Expert Courses",
+                desc: "Learn from industry professionals with structured curriculum",
+              },
+              {
+                icon: "📝",
+                title: "Assessments",
+                desc: "Pre-course, in-course, and post-course evaluations to track growth",
+              },
+              {
+                icon: "🎯",
+                title: "Certifications",
+                desc: "Earn recognized certificates upon course completion",
+              },
             ].map((f) => (
-              <div key={f.title} className="rounded-2xl bg-white border border-neutral-200/80 p-6 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+              <div
+                key={f.title}
+                className="rounded-2xl bg-white border border-neutral-200/80 p-6 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+              >
                 <div className="text-3xl mb-3">{f.icon}</div>
                 <h3 className="font-semibold text-neutral-900">{f.title}</h3>
                 <p className="mt-1 text-sm text-neutral-500">{f.desc}</p>
@@ -95,10 +129,10 @@ export default function Home() {
           {/* Stats */}
           <div className="mt-16 flex flex-wrap items-center justify-center gap-12 text-center">
             {[
-              { value: '6+', label: 'Courses' },
-              { value: '50+', label: 'Lessons' },
-              { value: '10+', label: 'Instructors' },
-              { value: '100%', label: 'Free to Start' },
+              { value: "6+", label: "Courses" },
+              { value: "50+", label: "Lessons" },
+              { value: "10+", label: "Instructors" },
+              { value: "100%", label: "Free to Start" },
             ].map((s) => (
               <div key={s.label}>
                 <p className="text-3xl font-bold text-primary-600">{s.value}</p>
@@ -110,19 +144,34 @@ export default function Home() {
 
         {/* Footer */}
         <footer className="border-t border-neutral-200 bg-white py-6 text-center text-sm text-neutral-500">
-          LearnHub LMS — Built for the future of learning
+          V-Align LMS — Align technology, processes, and human potential
         </footer>
       </div>
-    )
+    );
   }
 
   // Loading or redirecting
   return (
     <div className="flex h-screen items-center justify-center bg-surface-secondary">
-      <svg className="h-8 w-8 animate-spin text-primary-600" viewBox="0 0 24 24" fill="none">
-        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+      <svg
+        className="h-8 w-8 animate-spin text-primary-600"
+        viewBox="0 0 24 24"
+        fill="none"
+      >
+        <circle
+          className="opacity-25"
+          cx="12"
+          cy="12"
+          r="10"
+          stroke="currentColor"
+          strokeWidth="4"
+        />
+        <path
+          className="opacity-75"
+          fill="currentColor"
+          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+        />
       </svg>
     </div>
-  )
+  );
 }

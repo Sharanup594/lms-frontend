@@ -63,8 +63,8 @@ export default function SkillAssessmentPage() {
       <div className="w-full max-w-2xl">
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-primary-500 to-primary-700 text-white font-bold text-xl shadow-lg shadow-primary-500/30">
-            LH
+          <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-primary-600 to-primary-800 text-white font-bold text-xl shadow-lg shadow-primary-600/30">
+            VA
           </div>
           <h1 className="text-2xl font-bold text-neutral-900">Skill Assessment</h1>
           <p className="mt-1 text-sm text-neutral-500">Help us understand your background to recommend the best courses</p>
